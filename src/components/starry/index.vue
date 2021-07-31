@@ -11,19 +11,16 @@
 export default {};
 </script>
 
-<style>
-body {
-    background: #000;
-    /* background: #040d21; */
-    color: #fff;
-    font-family: sans-serif;
-    overflow: hidden;
-}
+<style scoped>
 .starfield {
+    width: 100vw;
+    height: 100vh;
     position: fixed;
-    width: 100%;
-    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
     overflow: hidden;
+    background: #000;
 }
 
 .starfield .static {

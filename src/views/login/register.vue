@@ -209,7 +209,7 @@ let rules = reactive({
 });
 </script>
 
-<style scope>
+<style scoped>
 @import "@/style/border/lineAnimation.css";
 .box {
     width: 600px;
