@@ -1,30 +1,96 @@
 <template>
-    <button v-if="type == 'draw'" class="draw">{{ text }}<slot /></button>
-    <button v-if="type == 'meet'" class="draw meet">{{ text }}<slot /></button>
-    <button v-if="type == 'center'" class="center">{{ text }}<slot /></button>
-    <button v-if="type == 'spin'" class="spin">{{ text }}<slot /></button>
-    <button v-if="type == 'circle'" class="spin circle">
+    <button
+        v-if="type == 'draw'"
+        class="draw"
+        :class="customClass"
+        :style="customStyle"
+        @click="$emit('click')"
+    >
         {{ text }}<slot />
     </button>
-    <button v-if="type == 'thick'" class="spin thick">
+    <button
+        v-if="type == 'meet'"
+        class="draw meet"
+        :class="customClass"
+        :style="customStyle"
+        @click="$emit('click')"
+    >
+        {{ text }}<slot />
+    </button>
+    <button
+        v-if="type == 'center'"
+        class="center"
+        :class="customClass"
+        :style="customStyle"
+        @click="$emit('click')"
+    >
+        {{ text }}<slot />
+    </button>
+    <button
+        v-if="type == 'spin'"
+        class="spin"
+        :class="customClass"
+        :style="customStyle"
+        @click="$emit('click')"
+    >
+        {{ text }}<slot />
+    </button>
+    <button
+        v-if="type == 'circle'"
+        class="spin circle"
+        :class="customClass"
+        :style="customStyle"
+        @click="$emit('click')"
+    >
+        {{ text }}<slot />
+    </button>
+    <button
+        v-if="type == 'thick'"
+        class="spin thick"
+        :class="customClass"
+        :style="customStyle"
+        @click="$emit('click')"
+    >
         {{ text }}<slot />
     </button>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
 export default {
     name: "bButoon",
     props: {
         type: {
-            // 按钮类型
+            // 边框类型
             type: String,
             default: "draw",
         },
+        borderColor:{
+            // 边框颜色
+            type:String,
+            default:""
+        },
+        borderHoverColor: {
+            // hover边框颜色
+            type: String,
+            default: "#627597",
+        },
+        textHoverColor: {
+            // hover时文字颜色
+            type: String,
+            default: "#627597",
+        },
         text: {
-            // 按钮类型
+            // 按钮文字
             type: String,
             default: "button",
+        },
+        customClass: {
+            type: String,
+            default: "",
+        },
+        customStyle: {
+            type: String,
+            default: "",
         },
     },
 };
@@ -35,12 +101,11 @@ button {
     background: none;
     border: 0;
     box-sizing: border-box;
-    box-shadow: inset 0 0 0 2px #f45e61;
+    box-shadow: inset 0 0 0 2px v-bind(borderColor);
     color: #f45e61;
     font-size: inherit;
-    font-weight: 700;
-    margin: 1em;
-    padding: 1em 2em;
+    /* font-weight: 700; */
+    padding: 10px 20px;
     text-align: center;
     /* text-transform: capitalize; */
     position: relative;
@@ -76,7 +141,8 @@ button::after {
     right: 0;
 }
 .draw:hover {
-    color: #60daaa;
+    /* color: #60daaa; */
+    color:v-bind(textHoverColor)
 }
 .draw:hover::before,
 .draw:hover::after {
@@ -84,14 +150,14 @@ button::after {
     height: 100%;
 }
 .draw:hover::before {
-    border-top-color: #60daaa;
-    border-right-color: #60daaa;
+    border-top-color: v-bind(borderHoverColor);
+    border-right-color:  v-bind(borderHoverColor);
     -webkit-transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
     transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
 }
 .draw:hover::after {
-    border-bottom-color: #60daaa;
-    border-left-color: #60daaa;
+    border-bottom-color: v-bind(borderHoverColor);
+    border-left-color:  v-bind(borderHoverColor);
     -webkit-transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s,
         height 0.25s ease-out 0.75s;
     transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s,
@@ -99,25 +165,27 @@ button::after {
 }
 
 .meet:hover {
-    color: #fbca67;
+    /* color: #fbca67; */
+    color: v-bind(textHoverColor);
 }
 .meet::after {
     top: 0;
     left: 0;
 }
 .meet:hover::before {
-    border-top-color: #fbca67;
-    border-right-color: #fbca67;
+    border-top-color:  v-bind(borderHoverColor);
+    border-right-color:  v-bind(borderHoverColor);
 }
 .meet:hover::after {
-    border-bottom-color: #fbca67;
-    border-left-color: #fbca67;
+    border-bottom-color:  v-bind(borderHoverColor);
+    border-left-color:  v-bind(borderHoverColor);
     -webkit-transition: height 0.25s ease-out, width 0.25s ease-out 0.25s;
     transition: height 0.25s ease-out, width 0.25s ease-out 0.25s;
 }
 
 .center:hover {
-    color: #6477b9;
+    /* color: #6477b9; */
+    color: v-bind(textHoverColor);
 }
 .center::before,
 .center::after {
@@ -130,14 +198,14 @@ button::after {
     transform-origin: center;
 }
 .center::before {
-    border-top: 2px solid #6477b9;
-    border-bottom: 2px solid #6477b9;
+    border-top: 2px solid  v-bind(borderHoverColor);
+    border-bottom: 2px solid  v-bind(borderHoverColor);
     -webkit-transform: scale3d(0, 1, 1);
     transform: scale3d(0, 1, 1);
 }
 .center::after {
-    border-left: 2px solid #6477b9;
-    border-right: 2px solid #6477b9;
+    border-left: 2px solid  v-bind(borderHoverColor);
+    border-right: 2px solid  v-bind(borderHoverColor);
     -webkit-transform: scale3d(1, 0, 1);
     transform: scale3d(1, 0, 1);
 }
@@ -155,7 +223,8 @@ button::after {
     padding: 0;
 }
 .spin:hover {
-    color: #0eb7da;
+    /* color: #0eb7da; */
+    color: v-bind(textHoverColor);
 }
 .spin::before,
 .spin::after {
@@ -166,9 +235,9 @@ button::after {
     border: 2px solid transparent;
 }
 .spin:hover::before {
-    border-top-color: #0eb7da;
-    border-right-color: #0eb7da;
-    border-bottom-color: #0eb7da;
+    border-top-color:  v-bind(borderHoverColor);
+    border-right-color:  v-bind(borderHoverColor);
+    border-bottom-color:  v-bind(borderHoverColor);
     -webkit-transition: border-top-color 0.15s linear,
         border-right-color 0.15s linear 0.1s,
         border-bottom-color 0.15s linear 0.2s;
@@ -180,7 +249,7 @@ button::after {
     border: 0 solid transparent;
 }
 .spin:hover::after {
-    border-top: 2px solid #0eb7da;
+    border-top: 2px solid  v-bind(borderHoverColor);
     border-left-width: 2px;
     border-right-width: 2px;
     -webkit-transform: rotate(270deg);
@@ -204,7 +273,7 @@ button::after {
     color: #f45e61;
 }
 .thick:hover {
-    color: #fff;
+    color: v-bind(textHoverColor);
     font-weight: 700;
 }
 .thick::before {
@@ -216,10 +285,10 @@ button::after {
     z-index: -1;
 }
 .thick:hover::before {
-    background: #f45e61;
-    border-top-color: #f45e61;
-    border-right-color: #f45e61;
-    border-bottom-color: #f45e61;
+    background:  v-bind(borderHoverColor);
+    border-top-color:  v-bind(borderHoverColor);
+    border-right-color:  v-bind(borderHoverColor);
+    border-bottom-color:  v-bind(borderHoverColor);
     -webkit-transition: background 0s linear 0.4s, border-top-color 0.15s linear,
         border-right-color 0.15s linear 0.15s,
         border-bottom-color 0.15s linear 0.25s;
@@ -228,7 +297,7 @@ button::after {
         border-bottom-color 0.15s linear 0.25s;
 }
 .thick:hover::after {
-    border-top: 3em solid #f45e61;
+    border-top: 3em solid  v-bind(borderHoverColor);
     border-left-width: 3em;
     border-right-width: 3em;
 }

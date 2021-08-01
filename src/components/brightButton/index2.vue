@@ -13,26 +13,14 @@
         {{ text }}<slot></slot>
     </div> -->
 
-    <div
-        class="button bz-buttonAnimat"
-        :class="[
-            type,
-            customClass,
-            clockwise ? 'clockwise' : 'counterclockwise',
-        ]"
-        :style="customStyle"
-        @click="$emit('click')"
-    >
-        {{ text }}<slot></slot>
-    </div>
     <!-- 顺时针 -->
-    <!-- <template v-if="clockwise">
+    <template v-if="clockwise">
         <div
             v-if="type == 'horizontal'"
             class="button bz-buttonAnimat clockwise horizontal"
-            :class="[type, clockwise?'clockwise':'counterclockwise']"
+            :class="customClass"
             :style="customStyle"
-            @click="childClick()"
+            @click="$emit('click')"
         >
             {{ text }}<slot></slot>
         </div>
@@ -41,7 +29,7 @@
             class="button bz-buttonAnimat clockwise vertical"
             :class="customClass"
             :style="customStyle"
-            @click="childClick()"
+            @click="$emit('click')"
         >
             {{ text }}<slot></slot>
         </div>
@@ -50,22 +38,22 @@
             class="button bz-buttonAnimat clockwise both"
             :class="customClass"
             :style="customStyle"
-            @click="childClick()"
+            @click="$emit('click')"
         >
             {{ text }}<slot></slot>
             <div class="inner"></div>
         </div>
-    </template> -->
+    </template>
     <!-- 顺时针 // -->
 
     <!-- 逆时针 -->
-    <!-- <template v-else>
+    <template v-else>
         <div
             v-if="type == 'horizontal'"
             class="button bz-buttonAnimat counterclockwise horizontal"
             :class="customClass"
             :style="customStyle"
-            @click="childClick()"
+            @click="$emit('click')"
         >
             {{ text }}<slot></slot>
         </div>
@@ -74,7 +62,7 @@
             class="button bz-buttonAnimat counterclockwise vertical"
             :class="customClass"
             :style="customStyle"
-            @click="childClick()"
+            @click="$emit('click')"
         >
             {{ text }}<slot></slot>
         </div>
@@ -83,12 +71,12 @@
             class="button bz-buttonAnimat counterclockwise both"
             :class="customClass"
             :style="customStyle"
-            @click="childClick()"
+            @click="$emit('click')"
         >
             {{ text }}<slot></slot>
             <div class="inner"></div>
         </div>
-    </template> -->
+    </template>
     <!-- 逆时针 // -->
 </template>
 
@@ -100,12 +88,17 @@ export default {
         type: {
             // 边框类型
             type: String,
-            default: "horizontal",
+            default: "",
         },
         borderColor: {
             // 边框颜色
             type: String,
-            default: "#c5bdb0",
+            default: "#627597",
+        },
+        textHoverColor: {
+            // hover时文字颜色
+            type: String,
+            default: "#627597",
         },
         text: {
             // 按钮文字
@@ -127,15 +120,17 @@ export default {
         },
     },
 
-    // setup(props: any, { emit }: any) {
-    //     const childClick = () => {
-    //         emit("aButton-click");
-    //     };
+    setup(props: any, { emit }: any) {
+        console.log(props);
 
-    //     return {
-    //         childClick,
-    //     };
-    // },
+        // const childClick = () => {
+        //     emit("aButton-click");
+        // };
+
+        // return {
+        //     childClick,
+        // };
+    },
 };
 </script>
 
@@ -149,7 +144,11 @@ export default {
     font-family: "Lato";
     font-size: 18px;
     padding: 10px 20px;
-    box-shadow: 0 0 4px #fff;
+    /* box-shadow: 0 0 2px #fff; */
+}
+
+.button:hover {
+    color: v-bind(textHoverColor) !important;
 }
 .bz-buttonAnimat {
     position: relative;
