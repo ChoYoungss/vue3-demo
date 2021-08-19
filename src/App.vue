@@ -20,4 +20,8 @@ export default defineComponent({
     fill: currentColor;
     overflow: hidden;
 }
+
+#app{
+    height: 100%;
+}
 </style>

@@ -3,19 +3,12 @@
     <starry />
     <!-- 星空背景 // -->
 
-    <!-- sign up -->
-    <el-row class="pd-20" justify="end">
-        <el-col :span="3" class="flex-ec">
-            <aButton type="both" text="Sign up" @click="toRegister()">
-                <i class="el-icon-right el-icon--right"></i>
-            </aButton>
-        </el-col>
-    </el-row>
-    <!-- sign up // -->
-
     <div class="box">
-        <div class="font-20">Sign in to Polaris</div>
-        <el-row>
+        <div class="font-16 ing">Welcome to Polaris!</div>
+        <div class="font-16 delay mt-15" v-if="showDelay">
+            Let's begin the adventure
+        </div>
+        <el-row v-if="showBox">
             <el-col :span="18">
                 <el-space
                     direction="vertical"
@@ -34,14 +27,11 @@
                                 size="mini"
                             >
                                 <template #prefix>
-                                    <svg
-                                        class="icon"
-                                        aria-hidden="true"
+                                    <vIcon
+                                        name="xiangyou"
                                         color="#ea4aaa"
                                         font-size="20"
-                                    >
-                                        <use xlink:href="#icon-xiangyou"></use>
-                                    </svg>
+                                    />
                                 </template>
                             </el-input>
                         </el-form-item>
@@ -56,14 +46,11 @@
                                 show-password
                             >
                                 <template #prefix>
-                                    <svg
-                                        class="icon"
-                                        aria-hidden="true"
+                                    <vIcon
+                                        name="xiangyou"
                                         color="#ea4aaa"
                                         font-size="20"
-                                    >
-                                        <use xlink:href="#icon-xiangyou"></use>
-                                    </svg>
+                                    />
                                 </template>
                             </el-input>
                         </el-form-item>
@@ -71,7 +58,7 @@
                     </el-form>
 
                     <!-- login按钮 -->
-                    <bButton
+                    <vButton
                         text="continue"
                         custom-style="color:#627597"
                         @click="login()"
@@ -79,32 +66,31 @@
                     <!-- login按钮 // -->
                 </el-space>
             </el-col>
-            <el-col> </el-col>
         </el-row>
     </div>
 </template>
 
 <script lang="ts" setup>
 import starry from "@/components/starry/index.vue";
-import bButton from "@/components/brightButton/index.vue";
-import aButton from "@/components/brightButton/index2.vue";
-import { ref, reactive, toRefs } from "vue";
+import vButton from "@/components/vButton/index.vue";
+import { ref, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
-let ruleForm = reactive({
-    email: ref(""),
-    password: ref(""),
-});
-
 /**
- * 注册
+ * 动画加载欢迎语和输入框
  */
-const router = useRouter();
-const toRegister = () => router.push({ name: "register" });
+ let showDelay = ref(false);
+let showBox = ref(false);
+setTimeout(() => (showDelay.value = true), 1200);
+setTimeout(() => (showBox.value = true), 2500);
 
 /**
  * 验证登录
  */
+ let ruleForm = reactive({
+    email: ref(""),
+    password: ref(""),
+});
 const login = () => {
     if (!ruleForm.email) {
         return ElMessage({ message: "请输入用户名或邮箱地址" });
@@ -149,5 +135,41 @@ const login = () => {
 .box :deep(.el-input__prefix) {
     display: flex;
     align-items: center;
+}
+
+.ing {
+    width: 20ch;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: 1.2s ing steps(20);
+}
+
+@keyframes ing {
+    from {
+        width: 0ch;
+    }
+    to {
+        width: 20ch;
+    }
+}
+
+.delay {
+    visibility: hidden;
+    width: 25ch;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: 1s delaying steps(25);
+    animation-fill-mode: forwards;
+}
+
+@keyframes delaying {
+    from {
+        visibility: visible;
+        width: 0ch;
+    }
+    to {
+        visibility: visible;
+        width: 25ch;
+    }
 }
 </style>

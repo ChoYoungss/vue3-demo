@@ -7,11 +7,15 @@ import store from "./store/index";
 import ElementPlus from "element-plus";
 import "element-plus/lib/theme-chalk/index.css";
 
-
-// iconfont symbol引用
-import "./assets/icon/iconSymbol.js";
-
 // 等宽字体
-import 'vfonts/FiraCode.css'
+import "vfonts/FiraCode.css";
 
-createApp(App).use(router).use(store).use(ElementPlus).mount("#app");
+// icon组件
+import vIcon from "./components/vIcon/index.vue";
+
+createApp(App)
+  .use(router)
+  .use(store)
+  .use(ElementPlus)
+  .component("vIcon", vIcon)
+  .mount("#app");
