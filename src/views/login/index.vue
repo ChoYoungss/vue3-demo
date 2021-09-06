@@ -79,15 +79,15 @@ import { ElMessage } from "element-plus";
 /**
  * 动画加载欢迎语和输入框
  */
- let showDelay = ref(false);
+let showDelay = ref(false);
 let showBox = ref(false);
-setTimeout(() => (showDelay.value = true), 1200);
-setTimeout(() => (showBox.value = true), 2500);
+setTimeout(() => (showDelay.value = true), 1300);
+setTimeout(() => (showBox.value = true), 3000);
 
 /**
  * 验证登录
  */
- let ruleForm = reactive({
+let ruleForm = reactive({
     email: ref(""),
     password: ref(""),
 });
@@ -158,7 +158,7 @@ const login = () => {
     width: 25ch;
     overflow: hidden;
     white-space: nowrap;
-    animation: 1s delaying steps(25);
+    animation: 1.5s delaying steps(25);
     animation-fill-mode: forwards;
 }
 
