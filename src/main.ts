@@ -14,8 +14,8 @@ import "vfonts/FiraCode.css";
 import vIcon from "./components/vIcon/index.vue";
 
 createApp(App)
-  .use(router)
-  .use(store)
-  .use(ElementPlus)
-  .component("vIcon", vIcon)
-  .mount("#app");
+	.use(router)
+	.use(store)
+	.use(ElementPlus)
+	.component("vIcon", vIcon)
+	.mount("#app");
