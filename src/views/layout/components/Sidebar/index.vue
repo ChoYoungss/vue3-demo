@@ -1,5 +1,5 @@
 <template>
-	<el-scrollbar :style="[{ minWidth: isCollapse ? 'auto' : '200px' }]">
+	<el-scrollbar style="padding-right: 30px">
 		<el-menu
 			:uniqueOpened="true"
 			default-active="2"
@@ -56,18 +56,19 @@
 				</el-menu-item-group>
 			</el-submenu>
 		</el-menu>
+		<toggleBar :isCollapse="isCollapse" @click="handleToggle" />
 	</el-scrollbar>
-	<toggleBar :isCollapse="isCollapse" @click="handleToggle" />
 </template>
 
 <script lang="ts">
 import toggleBar from "./components/toggleBar.vue";
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 export default {
 	name: "sidebar",
 	components: {
 		toggleBar,
 	},
+	emits: ["toggleBar"],
 	setup(props: any, { emit }: any) {
 		let isCollapse = ref(false);
 		const handleOpen = (key: any, keyPath: any) => {
@@ -78,6 +79,7 @@ export default {
 		};
 		const handleToggle = () => {
 			isCollapse.value = !isCollapse.value;
+			emit("toggleBar", isCollapse.value);
 		};
 		return {
 			handleOpen,
@@ -93,6 +95,11 @@ export default {
 .sidebar {
 	height: calc(100vh - 60px);
 	background-color: rgb(84, 92, 100);
-	overflow: hidden;
+    overflow: hidden;
+}
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+	width: 200px;
+	min-height: 400px;
 }
 </style>

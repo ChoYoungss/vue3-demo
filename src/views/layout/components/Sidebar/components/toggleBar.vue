@@ -1,6 +1,6 @@
 <template>
-	<div class="toggle-bar">
-		<div :class="['bar-box', isCollapse ? 'showbox' : '']">
+	<div :class="['toggle-bar', customClass]">
+		<div :class="['bar-box', isCollapse ? 'bar-reverse' : '']">
 			<span></span>
 			<span></span>
 		</div>
@@ -15,8 +15,11 @@ export default {
 			type: Boolean,
 			default: true,
 		},
+		customClass: {
+			type: String,
+			default: "",
+		},
 	},
-	setup(props: Object) {},
 };
 </script>
 
@@ -28,6 +31,9 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
 .bar-box {
@@ -65,13 +71,13 @@ export default {
 	background-color: rgba(153, 153, 153, 1);
 }
 
-.showbox:hover.bar-box span:nth-child(1) {
+.bar-reverse:hover.bar-box span:nth-child(1) {
 	height: 42px;
 	transform: rotate(-16deg);
 	background-color: rgba(153, 153, 153, 1);
 }
 
-.showbox:hover.bar-box span:nth-child(2) {
+.bar-reverse:hover.bar-box span:nth-child(2) {
 	height: 42px;
 	transform: rotate(16deg);
 	background-color: rgba(153, 153, 153, 1);

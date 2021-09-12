@@ -3,7 +3,8 @@
 		<el-container>
 			<el-header>Header</el-header>
 			<el-container>
-				<el-aside width="auto"><vSidebar /></el-aside>
+				<!-- <el-aside :width="isCollapse?'auto':'230px'"><vSidebar @toggleBar="toggleBar" /></el-aside> -->
+				<el-aside width="auto"><vSidebar @toggleBar="toggleBar" /></el-aside>
 				<el-container>
 					<el-main><vAppMain /></el-main>
 					<el-footer><vFooter /></el-footer>
@@ -17,6 +18,12 @@
 import vFooter from "./components/Footer/index.vue";
 import vSidebar from "./components/Sidebar/index.vue";
 import vAppMain from "./components/AppMain/index.vue";
+import { ref } from "vue";
+let isCollapse = ref(false);
+const toggleBar = (e: any) => {
+	console.log(e);
+	isCollapse.value = e;
+};
 </script>
 
 <style scoped>
@@ -40,14 +47,14 @@ import vAppMain from "./components/AppMain/index.vue";
 .el-aside {
 	background-color: #fff;
 	color: var(--el-text-color-primary);
-	display: flex;
+	/* display: flex; */
 	/* text-align: center; */
 	/* line-height: 200px; */
 }
 
 .el-main {
 	/* background-color: #fff; */
-	background: #d3dce6;
+	background: #f3f3f3;
 	color: var(--el-text-color-primary);
 	text-align: center;
 	line-height: 160px;
