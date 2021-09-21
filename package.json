@@ -2,18 +2,23 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit --skipLibCheck && vite build",
+    "build": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons": "0.0.11",
     "axios": "^0.21.1",
-    "element-plus": "^1.0.2-beta.65",
+    "element-plus": "^1.0.2-beta.69",
+    "js-cookie": "^3.0.1",
     "normalize.css": "^8.0.1",
+    "screenfull": "^5.1.0",
     "vue": "^3.0.5",
     "vue-router": "^4.0.11",
+    "vue-svgicon": "^3.2.9",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@types/js-cookie": "^2.2.7",
     "@types/node": "^15.12.4",
     "@vitejs/plugin-vue": "^1.2.3",
     "@vue/compiler-sfc": "^3.0.5",

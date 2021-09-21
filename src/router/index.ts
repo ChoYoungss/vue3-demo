@@ -11,13 +11,25 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: "/home",
+		name: "home",
 		component: Layout,
 		children: [
 			{
-				path: "home",
-				name: "home",
+				path: "",
 				component: () => import("@/views/home/index.vue"),
-				meta: { title: "Home", icon: "form" },
+				meta: { title: "Home", icon: "menu" },
+			},
+		],
+	},
+	{
+		path: "/formTable",
+		name: "formTable",
+		component: Layout,
+		children: [
+			{
+				path: "",
+				component: () => import("@/views/formTable/index.vue"),
+				meta: { title: "formTable", icon: "s-grid" },
 			},
 		],
 	},

@@ -89,7 +89,7 @@ const login = () => {
 		return ElMessage({ message: "请输入密码" });
 	}
 	ElMessage({ message: "登录成功", type: "success" });
-	router.push({ name: "home" });
+	router.push("/home");
 };
 </script>
 
